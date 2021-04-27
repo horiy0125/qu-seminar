@@ -6,4 +6,4 @@
 
 ## 環境
 
-- Python 3.8.6 (pyenv)
+- Python 3.9.4 64-bit (pyenv)
