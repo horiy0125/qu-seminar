@@ -1,4 +1,4 @@
-def compute_fibonacci_looping(N: int) -> int:
+def for_loop(N: int) -> int:
     fibonacci_numbers = [0, 1]
 
     if N >= 2:
@@ -9,5 +9,6 @@ def compute_fibonacci_looping(N: int) -> int:
     return fibonacci_numbers[N]
 
 
-for n in range(22):
-    print(compute_fibonacci_looping(n))
+print('\n')
+print('answer:', for_loop(10 ** 7))
+print('\n')
