@@ -10,5 +10,5 @@ def for_loop(N: int) -> int:
 
 
 print('\n')
-print('answer:', for_loop(10 ** 7))
+print('answer:', for_loop(10 ** 5))
 print('\n')
