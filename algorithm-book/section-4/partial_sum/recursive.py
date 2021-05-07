@@ -1,5 +1,12 @@
+count = 0
+
+
 def recursive(n: int, numbers: list, target_sum: int):
+    global count
+
+    count += 1
     print(n, target_sum, numbers)
+
     if n == 0:
         return target_sum == 0
     else:
@@ -12,8 +19,8 @@ def recursive(n: int, numbers: list, target_sum: int):
 
 
 N = 4
-a = [3, 2, 6, 5]
-W = 14
+a = [100, 200, 300, 400]
+W = 200
 
 possible = recursive(N, a, W)
-print(possible)
+print(possible, count)
