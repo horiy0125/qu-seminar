@@ -1,3 +1,5 @@
+# ABC051-B Sum of Three Integers
+
 K, S = map(int, input().split())
 
 count = 0

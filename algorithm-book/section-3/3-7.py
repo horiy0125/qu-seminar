@@ -1,3 +1,5 @@
+# ABC045-C たくさんの数式
+
 import itertools
 
 S = input()

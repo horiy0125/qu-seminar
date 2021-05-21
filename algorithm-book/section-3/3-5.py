@@ -1,3 +1,5 @@
+# ABC081-B Shift Only
+
 N = int(input())
 An = input().split()
 
