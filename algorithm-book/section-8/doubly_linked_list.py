@@ -10,6 +10,7 @@ class Doubly_linked_list:
         self.head = None
 
     def append(self, x) -> None:
+        # O(1)
         new = Cell(x)
 
         # 1つ目の要素を追加した場合
@@ -24,6 +25,7 @@ class Doubly_linked_list:
         self.head.prev = new
 
     def insert_head(self, x) -> None:
+        # O(1)
         new = Cell(x)
 
         # 1つ目の要素を追加した場合
@@ -39,6 +41,7 @@ class Doubly_linked_list:
         self.head = new
 
     def delete(self, x) -> None:
+        # Pythonではポインタ渡しができないためO(1)ではなくO(N)
         tmp_cell = self.head
         head_cell = self.head
 
