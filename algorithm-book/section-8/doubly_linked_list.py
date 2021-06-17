@@ -40,6 +40,16 @@ class Doubly_linked_list:
         self.head.prev = new
         self.head = new
 
+    def get_cell(self, index) -> any:
+        # O(N)
+        tmp_cell = self.head
+
+        for count in range(index+1):
+            if count == index:
+                return tmp_cell.x
+
+            tmp_cell = tmp_cell.next
+
     def delete(self, x) -> None:
         # Pythonではポインタ渡しができないためO(1)ではなくO(N)
         tmp_cell = self.head
@@ -156,3 +166,7 @@ print()
 print('delete head cell (int 0) from the list')
 l.delete_head()
 print(l.std_list())
+print()
+
+print('search and get the third cell')
+print(l.get_cell(2))
