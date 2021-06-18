@@ -109,6 +109,24 @@ class Doubly_linked_list:
         self.head.prev.prev.next = self.head
         self.head.prev = self.head.prev.prev
 
+    def print_list(self) -> None:
+        # O(N)
+        tmp_cell = self.head
+
+        # 要素が1つもなかった場合
+        if tmp_cell == None:
+            print('[]')
+            return
+
+        print('[ ', end='')
+        for i in range(self.size):
+            if i == self.size - 1:
+                print(f"{tmp_cell.x} ]")
+            else:
+                print(tmp_cell.x, end=' -> ')
+
+            tmp_cell = tmp_cell.next
+
     def std_list(self) -> list:
         # O(N)
         l = []
@@ -139,19 +157,19 @@ class Doubly_linked_list:
 
 
 l = Doubly_linked_list()
-print(l.std_list(), l.size)
+l.print_list()
 print()
 
 print('add 1, 2, 3 (int) to the list')
 l.append(1)
 l.append(2)
 l.append(3)
-print(l.std_list(), l.size)
+l.print_list()
 print()
 
 print('add 0 to head of the list')
 l.insert_head(0)
-print(l.std_list(), l.size)
+l.print_list()
 print()
 
 print('add 4, 5, 6 (int) and hoge (str) to the list')
@@ -159,22 +177,22 @@ l.append(4)
 l.append(5)
 l.append(6)
 l.append('hoge')
-print(l.std_list(), l.size)
+l.print_list()
 print()
 
 print('delete 6 from the list')
 l.delete(6)
-print(l.std_list(), l.size)
+l.print_list()
 print()
 
 print('delete last cell (str hoge) from list')
 l.delete_tail()
-print(l.std_list(), l.size)
+l.print_list()
 print()
 
 print('delete head cell (int 0) from the list')
 l.delete_head()
-print(l.std_list(), l.size)
+l.print_list()
 print()
 
 print('search and get the third cell')
