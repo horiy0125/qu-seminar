@@ -1,6 +1,6 @@
 class Cell:
-    def __init__(self, x) -> None:
-        self.x = x
+    def __init__(self, value) -> None:
+        self.value = value
         self.next = None
         self.prev = None
 
@@ -10,9 +10,9 @@ class Doubly_linked_list:
         self.head = None
         self.size = 0
 
-    def append(self, x) -> None:
+    def append(self, value) -> None:
         # O(1)
-        new = Cell(x)
+        new = Cell(value)
         self.size += 1
 
         # 1つ目の要素を追加した場合
@@ -26,9 +26,9 @@ class Doubly_linked_list:
         new.next = self.head
         self.head.prev = new
 
-    def insert_head(self, x) -> None:
+    def insert_head(self, value) -> None:
         # O(1)
-        new = Cell(x)
+        new = Cell(value)
         self.size += 1
 
         # 1つ目の要素を追加した場合
@@ -49,11 +49,11 @@ class Doubly_linked_list:
 
         for count in range(index+1):
             if count == index:
-                return tmp_cell.x
+                return tmp_cell.value
 
             tmp_cell = tmp_cell.next
 
-    def delete(self, x) -> None:
+    def delete(self, value) -> None:
         # Pythonではポインタ渡しができないためO(1)ではなくO(N)
         tmp_cell = self.head
         head_cell = self.head
@@ -65,7 +65,7 @@ class Doubly_linked_list:
         delete_count = 0
 
         while tmp_cell:
-            if tmp_cell.x == x:
+            if tmp_cell.value == value:
                 delete_count += 1
                 tmp_cell.prev.next = tmp_cell.next
                 tmp_cell.next.prev = tmp_cell.prev
@@ -121,9 +121,9 @@ class Doubly_linked_list:
         print('[ ', end='')
         for i in range(self.size):
             if i == self.size - 1:
-                print(f"{tmp_cell.x} ]")
+                print(f"{tmp_cell.value} ]")
             else:
-                print(tmp_cell.x, end=' -> ')
+                print(tmp_cell.value, end=' -> ')
 
             tmp_cell = tmp_cell.next
 
@@ -134,7 +134,7 @@ class Doubly_linked_list:
         tmp_cell = self.head
 
         while tmp_cell:
-            l.append(tmp_cell.x)
+            l.append(tmp_cell.value)
             tmp_cell = tmp_cell.next
             if tmp_cell == self.head:
                 break
