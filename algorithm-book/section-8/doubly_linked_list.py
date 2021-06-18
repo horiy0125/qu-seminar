@@ -141,20 +141,6 @@ class Doubly_linked_list:
 
         return l
 
-    # def show(self) -> None:
-    #     tmp_cell = self.head
-    #     print('[', end='')
-
-    #     while tmp_cell:
-    #         print(f"{tmp_cell.x}", end='')
-    #         tmp_cell = tmp_cell.next
-
-    #         if tmp_cell == self.head:
-    #             print(']')
-    #             return
-    #         else:
-    #             print(', ', end='')
-
 
 l = Doubly_linked_list()
 l.print_list()
