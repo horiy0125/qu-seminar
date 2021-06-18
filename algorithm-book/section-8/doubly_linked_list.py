@@ -8,10 +8,12 @@ class Cell:
 class Doubly_linked_list:
     def __init__(self) -> None:
         self.head = None
+        self.size = 0
 
     def append(self, x) -> None:
         # O(1)
         new = Cell(x)
+        self.size += 1
 
         # 1つ目の要素を追加した場合
         if self.head == None:
@@ -27,6 +29,7 @@ class Doubly_linked_list:
     def insert_head(self, x) -> None:
         # O(1)
         new = Cell(x)
+        self.size += 1
 
         # 1つ目の要素を追加した場合
         if self.head == None:
@@ -58,7 +61,9 @@ class Doubly_linked_list:
         if self.head == None:
             raise ValueError('delete from empty list')
 
+        self.size -= 1
         delete_count = 0
+
         while tmp_cell:
             if tmp_cell.x == x:
                 delete_count += 1
@@ -78,6 +83,8 @@ class Doubly_linked_list:
         if self.head == None:
             raise ValueError('delete from empty list')
 
+        self.size -= 1
+
         # 要素が1つしかない場合
         if self.head.next == self.head:
             self.head = None
@@ -91,6 +98,8 @@ class Doubly_linked_list:
         # O(1)
         if self.head == None:
             raise ValueError('delete from empty list')
+
+        self.size -= 1
 
         # 要素が1つしかない場合
         if self.head.next == self.head:
@@ -130,19 +139,19 @@ class Doubly_linked_list:
 
 
 l = Doubly_linked_list()
-print(l.std_list())
+print(l.std_list(), l.size)
 print()
 
 print('add 1, 2, 3 (int) to the list')
 l.append(1)
 l.append(2)
 l.append(3)
-print(l.std_list())
+print(l.std_list(), l.size)
 print()
 
 print('add 0 to head of the list')
 l.insert_head(0)
-print(l.std_list())
+print(l.std_list(), l.size)
 print()
 
 print('add 4, 5, 6 (int) and hoge (str) to the list')
@@ -150,22 +159,22 @@ l.append(4)
 l.append(5)
 l.append(6)
 l.append('hoge')
-print(l.std_list())
+print(l.std_list(), l.size)
 print()
 
 print('delete 6 from the list')
 l.delete(6)
-print(l.std_list())
+print(l.std_list(), l.size)
 print()
 
 print('delete last cell (str hoge) from list')
 l.delete_tail()
-print(l.std_list())
+print(l.std_list(), l.size)
 print()
 
 print('delete head cell (int 0) from the list')
 l.delete_head()
-print(l.std_list())
+print(l.std_list(), l.size)
 print()
 
 print('search and get the third cell')
