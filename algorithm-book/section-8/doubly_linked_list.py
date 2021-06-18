@@ -10,23 +10,17 @@ class Doubly_linked_list:
         self.head = None
         self.size = 0
 
-    def append(self, value) -> None:
-        # O(1)
-        new = Cell(value)
-        self.size += 1
+    def get_cell(self, index: int) -> any:
+        # O(N)
+        tmp_cell = self.head
 
-        # 1つ目の要素を追加した場合
-        if self.head == None:
-            self.head = new
-            self.head.next = new
-            self.head.prev = new
+        for count in range(index+1):
+            if count == index:
+                return tmp_cell.value
 
-        self.head.prev.next = new
-        new.prev = self.head.prev
-        new.next = self.head
-        self.head.prev = new
+            tmp_cell = tmp_cell.next
 
-    def insert_head(self, value) -> None:
+    def insert_head(self, value: any) -> None:
         # O(1)
         new = Cell(value)
         self.size += 1
@@ -43,40 +37,41 @@ class Doubly_linked_list:
         self.head.prev = new
         self.head = new
 
-    def get_cell(self, index) -> any:
+    def append(self, value: any) -> None:
+        # O(1)
+        new = Cell(value)
+        self.size += 1
+
+        # 1つ目の要素を追加した場合
+        if self.head == None:
+            self.head = new
+            self.head.next = new
+            self.head.prev = new
+
+        self.head.prev.next = new
+        new.prev = self.head.prev
+        new.next = self.head
+        self.head.prev = new
+
+    def delete(self, index: int) -> None:
         # O(N)
-        tmp_cell = self.head
-
-        for count in range(index+1):
-            if count == index:
-                return tmp_cell.value
-
-            tmp_cell = tmp_cell.next
-
-    def delete(self, value) -> None:
-        # Pythonではポインタ渡しができないためO(1)ではなくO(N)
         tmp_cell = self.head
         head_cell = self.head
 
         if self.head == None:
             raise ValueError('delete from empty list')
+        if index >= self.size:
+            raise IndexError('list index out of range')
 
         self.size -= 1
-        delete_count = 0
-
-        while tmp_cell:
-            if tmp_cell.value == value:
-                delete_count += 1
+        for count in range(index+1):
+            if count == index:
                 tmp_cell.prev.next = tmp_cell.next
                 tmp_cell.next.prev = tmp_cell.prev
-                if tmp_cell == self.head:
-                    self.head = self.head.next
-                return
+                if tmp_cell == head_cell:
+                    self.head = head_cell.next
+
             tmp_cell = tmp_cell.next
-            if tmp_cell == head_cell:
-                if delete_count == 0:
-                    raise ValueError('value not in list')
-                return
 
     def delete_head(self) -> None:
         # O(1)
