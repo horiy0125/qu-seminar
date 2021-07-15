@@ -2,6 +2,9 @@ class Heap:
     def __init__(self) -> None:
         self.heap = []
 
+    def length(self) -> int:
+        return len(self.heap)
+
     def top(self) -> any:
         if len(self.heap) > 0:
             return self.heap[0]
@@ -30,6 +33,12 @@ class Heap:
     def pop(self) -> None:
         if len(self.heap) == 0:
             return
+        elif len(self.heap) == 1:
+            self.heap = []
+            return
+        elif len(self.heap) == 2:
+            self.heap = self.heap[:1]
+            return
 
         l = len(self.heap) - 1
         top = self.heap[l]
@@ -53,6 +62,7 @@ class Heap:
 
 
 heap = Heap()
+print('insert values')
 heap.push(19)
 heap.push(12)
 heap.push(15)
@@ -65,6 +75,14 @@ heap.push(7)
 heap.push(5)
 heap.push(3)
 heap.push(2)
-print(heap.heap, len(heap.heap))
-heap.pop()
-print(heap.heap, len(heap.heap))
+print(f"heap: {heap.heap}")
+
+print('append top values and pop them one by one')
+
+l = []
+while heap.length() > 0:
+    l.append(heap.top())
+    heap.pop()
+
+print(f"heap: {heap.heap}")
+print(f"sort result: {l}")
