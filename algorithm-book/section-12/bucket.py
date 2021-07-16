@@ -10,8 +10,7 @@ class Bucket:
 
     def append_list(self, list: list) -> None:
         for value in list:
-            self.origin.append(value)
-            self.bucket[value] += 1
+            self.append(value)
 
     def sorted(self) -> list:
         cum = []
