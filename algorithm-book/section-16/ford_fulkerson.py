@@ -1,37 +1,81 @@
-class Edge:
-    def __init__(self, rev: int, from_index: int, to_index: int, cap: int):
-        self.rev = rev
-        self.from_index = from_index
-        self.to_index = to_index
-        self.cap = cap
+from collections import defaultdict, deque
+import sys
+import heapq
+import bisect
+import math
+import itertools
+import string
+import queue
+import datetime
+sys.setrecursionlimit(10**8)
+INF = float('inf')
+mod = 10**9+7
+eps = 10**-7
+def inpl(): return list(map(int, input().split()))
+def inpl_s(): return list(input().split())
 
 
-class Graph:
-    def __init__(self, size: int):
-        self.size = size
-        self.adjacency_list = []
-
-        for _ in range(size):
-            self.adjacency_list.append([])
-
-    def add_edge(self, from_index: int, to_index: int, capacity: int):
-        from_apex = self.adjacency_list[from_index]
-        to_apex = self.adjacency_list[to_index]
-
-        edge = Edge(len(to_apex), from_index, to_index, capacity)
-        rev_edge = Edge(len(from_apex), to_index, from_index, 0)
-
-        self.adjacency_list[from_index].append(edge)
-        self.adjacency_list[to_index].append(rev_edge)
+N, E = inpl()
+Start = 0
+Goal = N-1
+ans = 0
+lines = defaultdict(set)
+cost = [[0]*N for i in range(N)]
+for i in range(E):
+    a, b, c = inpl()
+    if c != 0:
+        lines[a].add(b)
+        cost[a][b] += c
 
 
-o = open("./input.txt")
-lines = o.readlines()
+def Ford_Fulkerson(s):  # sからFord-Fulkerson
+    global lines
+    global cost
+    global ans
+    queue = deque()  # BFS用のdeque
+    queue.append([s, INF])
+    ed = [True]*N  # 到達済み
+    ed[s] = False
+    route = [0 for i in range(N)]  # ルート
+    route[s] = -1
+    # BFS
+    while queue:
+        s, flow = queue.pop()
+        for t in lines[s]:  # s->t
+            if ed[t]:
+                flow = min(cost[s][t], flow)  # flow = min(直前のflow,line容量)
+                route[t] = s
+                queue.append([t, flow])
+                ed[t] = False
+                if t == Goal:  # ゴール到達
+                    ans += flow
+                    break
+        else:
+            continue
+        break
+    else:
+        return False
+    # ラインの更新
+    t = Goal
+    s = route[t]
+    while s != -1:
+        # s->tのコスト減少，ゼロになるなら辺を削除
+        cost[s][t] -= flow
+        if cost[s][t] == 0:
+            lines[s].remove(t)
+        # t->s(逆順)のコスト増加，元がゼロなら辺を作成
+        if cost[t][s] == 0:
+            lines[t].add(s)
+        cost[t][s] += flow
+        t = s
+        s = route[t]
 
-N, M = list(map(int, lines[0].split()))
+    return True
 
-graph = Graph(N)
 
-for line in lines[1:]:
-    from_index, to_index, capacity = list(map(int, line.split()))
-    graph.add_edge(from_index, to_index, capacity)
+while True:
+    if Ford_Fulkerson(Start):
+        continue
+    else:
+        break
+print(ans)
